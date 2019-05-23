@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "162236321229",
+    "firebase_url": "https://holteklamp.firebaseio.com",
+    "project_id": "holteklamp",
+    "storage_bucket": "holteklamp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162236321229:android:cecdf457daec0c4d",
+        "android_client_info": {
+          "package_name": "com.example.show"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162236321229-qbt9k37kbh5cado1ijmhvrtq99vlsedh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.show",
+            "certificate_hash": "a9707c00187564f95ce494c7f647f218be70edab"
+          }
+        },
+        {
+          "client_id": "162236321229-e9acqk62jd974898h0llttv5ak3ugvkv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.show",
+            "certificate_hash": "e32d31eb177adc744900b33b02471360d06efa7f"
+          }
+        },
+        {
+          "client_id": "162236321229-5vr7v22evahqgpnu91mnrmlletvsr9vd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoqKagF6gN5kGRutjwzw-2Hq3xhoOmuvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162236321229-5vr7v22evahqgpnu91mnrmlletvsr9vd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162236321229:android:adf35fa1c6e34486",
+        "android_client_info": {
+          "package_name": "com.tsc.holtek14th"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162236321229-tqvpm4508orsqjjftpap0h1r0p70nocg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tsc.holtek14th",
+            "certificate_hash": "a9707c00187564f95ce494c7f647f218be70edab"
+          }
+        },
+        {
+          "client_id": "162236321229-5vr7v22evahqgpnu91mnrmlletvsr9vd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoqKagF6gN5kGRutjwzw-2Hq3xhoOmuvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162236321229-5vr7v22evahqgpnu91mnrmlletvsr9vd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

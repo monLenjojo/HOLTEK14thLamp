@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HOLTEK14th</string>
+    <string name="title_my_library">MyLibrary</string>
+    <string name="title_discover">Discover</string>
+    <string name="title_me">Me</string>
+    <string name="title_more">More</string>
+</resources>
