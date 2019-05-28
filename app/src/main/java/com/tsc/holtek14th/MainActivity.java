@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.tsc.holtek14th.FIrebaseAddData.AddTestData;
 import com.tsc.holtek14th.recyclerFunction.MyLibraryRecyclerFunction;
@@ -48,11 +51,16 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.signInWithEmailAndPassword("bob@stu.edu.tw", "123456");
+        final FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signInWithEmailAndPassword("bob@stu.edu.tw", "123456").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
 
-        RecyclerView recyclerView = findViewById(R.id.myLibraryRecycler);
-        new MyLibraryRecyclerFunction(this, recyclerView, auth.getUid());
+                RecyclerView recyclerView = findViewById(R.id.myLibraryRecycler);
+                new MyLibraryRecyclerFunction(MainActivity.this, recyclerView, auth.getUid());
+
+            }
+        });
 
     }
 }
