@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_myLibrary:
 //                    mTextMessage.setText(R.string.title_my_library);
+                    Log.d("TAG", "onNavigationItemSelected: "+ new AddTestData());
                     return true;
                 case R.id.navigation_discover:
 //                    mTextMessage.setText(R.string.title_discover);
@@ -51,6 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.myLibraryRecycler);
         new MyLibraryRecyclerFunction(this, recyclerView, auth.getUid());
-        new AddTestData();
+
     }
 }

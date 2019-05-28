@@ -1,20 +1,20 @@
 package com.tsc.holtek14th.javaBean;
 
-public class StoryFormat {
+public class AllStoryFormat {
     String storyName;
     String storyUrl;
-    String uuid;
+    String storyPath;
     String storyPhoto;
     String storyDepiction;
     String time;
 
-    public StoryFormat() {
+    public AllStoryFormat() {
     }
 
-    public StoryFormat(String storyName, String storyUrl, String uuid, String storyPhoto, String storyDepiction, String time) {
+    public AllStoryFormat(String storyName, String storyUrl, String storyPath, String storyPhoto, String storyDepiction, String time) {
         this.storyName = storyName;
         this.storyUrl = storyUrl;
-        this.uuid = uuid;
+        this.storyPath = storyPath;
         this.storyPhoto = storyPhoto;
         this.storyDepiction = storyDepiction;
         this.time = time;
@@ -36,12 +36,12 @@ public class StoryFormat {
         this.storyUrl = storyUrl;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getStoryPath() {
+        return storyPath;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setStoryPath(String storyPath) {
+        this.storyPath = storyPath;
     }
 
     public String getStoryPhoto() {

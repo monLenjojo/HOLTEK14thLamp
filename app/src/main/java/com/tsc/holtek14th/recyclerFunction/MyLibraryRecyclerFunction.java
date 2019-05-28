@@ -8,7 +8,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.tsc.holtek14th.javaBean.StoryFormat;
+import com.tsc.holtek14th.javaBean.AllStoryFormat;
 import com.tsc.holtek14th.recyclerAdapter.MyLibraryRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class MyLibraryRecyclerFunction {
     Context context;
     RecyclerView recyclerView;
     String userId;
-    ArrayList<StoryFormat> arrayList = new ArrayList();
+    ArrayList<AllStoryFormat> arrayList = new ArrayList();
 
     public MyLibraryRecyclerFunction(Context context, RecyclerView recyclerView, String userId) {
         this.context = context;
@@ -33,7 +33,7 @@ public class MyLibraryRecyclerFunction {
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                        StoryFormat data = documentSnapshot.toObject(StoryFormat.class);
+                        AllStoryFormat data = documentSnapshot.toObject(AllStoryFormat.class);
                         arrayList.add(data);
                         upData();
                     }

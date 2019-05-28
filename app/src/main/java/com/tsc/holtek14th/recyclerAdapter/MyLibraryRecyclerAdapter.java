@@ -8,23 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-import com.google.firestore.admin.v1beta1.Progress;
 import com.tsc.holtek14th.R;
 import com.tsc.holtek14th.imgBase64.Base64toImg;
-import com.tsc.holtek14th.javaBean.StoryFormat;
+import com.tsc.holtek14th.javaBean.AllStoryFormat;
 
 import java.util.ArrayList;
 
 public class MyLibraryRecyclerAdapter extends RecyclerView.Adapter<MyLibraryRecyclerAdapter.MyLibraryViewHolder> {
 
     Context context;
-    ArrayList<StoryFormat> arrayList = new ArrayList();
+    ArrayList<AllStoryFormat> arrayList = new ArrayList();
 
-    public MyLibraryRecyclerAdapter(Context context, ArrayList<StoryFormat> arrayList) {
+    public MyLibraryRecyclerAdapter(Context context, ArrayList<AllStoryFormat> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
