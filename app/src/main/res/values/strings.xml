@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">HOLTEK14th</string>
+    <string name="app_name">i-BadTime</string>
     <string name="title_my_library">MyLibrary</string>
     <string name="title_discover">Discover</string>
     <string name="title_me">Me</string>
     <string name="title_more">More</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

@@ -130,9 +130,13 @@ public class AddTestData {
                     batch.set(firestore.collection("allStory").document(String.valueOf(size[0]+j)), arrayList.get(j));
                     for (int i = 0; i < 10; i++) {
                         String uid = FirebaseFirestore.getInstance().collection("id").document().getId();
-                        batch.set(firestore.collection("allProduct").document(
-                                        String.valueOf(size[0]+j)).collection("productData").document()
-                                , new ProductFormat(arrayList.get(j).getStoryPath(), uid, false, null)
+                        batch.set(firestore.collection("allProduct")
+                                        .document(String.valueOf(size[0]+j))
+                                        .collection("productData").document()
+                                , new ProductFormat(arrayList.get(j).getStoryPath()
+                                        , uid
+                                        , false
+                                        , null)
                         );
                     }
                 }
