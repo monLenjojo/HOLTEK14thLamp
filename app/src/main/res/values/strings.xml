@@ -1,4 +1,6 @@
 <resources>
+    <string name="facebook_app_id">466956190724648</string> <string name="fb_login_protocol_scheme">fb466956190724648</string>
+
     <string name="app_name">i-BadTime</string>
     <string name="title_my_library">MyLibrary</string>
     <string name="title_discover">Discover</string>

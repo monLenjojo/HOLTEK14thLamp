@@ -114,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:onClick="quit"
         android:text="取消"
@@ -122,5 +122,16 @@
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/edPasswd" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Button"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/btLogin"
+        app:layout_constraintStart_toStartOf="@+id/btFinish"
+        app:layout_constraintTop_toBottomOf="@+id/btFinish" />
 
 </android.support.constraint.ConstraintLayout>
