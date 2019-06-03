@@ -28,16 +28,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.tsc.holtek14th.Facebook.FacebookLogin;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
-    private static final String FBTAG = LoginActivity.class.getSimpleName()+" Facebook-auth";
+//    private static final String FBTAG = LoginActivity.class.getSimpleName()+" Facebook-auth";
     private FirebaseAuth auth;
     private EditText edUserId;
     private EditText edPasswd;
     private Boolean state;
-    CallbackManager callbackManager;
+    private FacebookLogin facebookLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,58 +48,25 @@ public class LoginActivity extends AppCompatActivity {
 
         edUserId = findViewById(R.id.edUserId);
         edPasswd = findViewById(R.id.edPasswd);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
 
         LoginButton loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
-        callbackManager = CallbackManager.Factory.create();
-        auth = FirebaseAuth.getInstance();
+        facebookLogin = new FacebookLogin(this,auth,loginButton);
+        facebookLogin.start();
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                AccessToken token = loginResult.getAccessToken();
-                AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-                auth.signInWithCredential(credential).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.d(FBTAG, "login onComplete: " + user.getDisplayName());
-                        }else {
-                            Log.d(FBTAG, "login is Fail");
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
-        Profile fbProfile = Profile.getCurrentProfile();
-
-        AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if (currentAccessToken==null) {
-                    auth.signOut();
-                    Log.d(FBTAG, "onCurrentAccessTokenChanged: ");
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    setResult(RESULT_OK);
+                    finish();
                 }
             }
-        };
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        facebookLogin.callbackManager.onActivityResult(requestCode,resultCode,data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -119,8 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isComplete()) {
                         if (task.isSuccessful()) {
-                            setResult(RESULT_OK);
-                            finish();
+//                            setResult(RESULT_OK);
+//                            finish();
+                            Log.d(TAG, "signInWithEmailAndPassword: "+ task.getResult().getUser().getEmail() + "--Successful");
                         } else {
                             new AlertDialog.Builder(LoginActivity.this)
                                     .setTitle("登入狀態")
