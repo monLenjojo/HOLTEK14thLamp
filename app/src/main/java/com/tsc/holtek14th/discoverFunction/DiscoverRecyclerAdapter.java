@@ -38,6 +38,12 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         discoverViewHolder.txStoryName.setText(arrayList.get(i).getStoryName());
         discoverViewHolder.txStoryEnglishName.setText(arrayList.get(i).getStoryDepiction());
         new Base64toImg(discoverViewHolder.imgPhoto,arrayList.get(i).getStoryPhoto());
+        discoverViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

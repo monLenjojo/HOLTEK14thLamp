@@ -27,6 +27,7 @@ public class DiscoverActivity extends AppCompatActivity {
         new DiscoverRecyclerFunction(this,recyclerView,user.getUid());
     }
 
+    //---navigation listener
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override

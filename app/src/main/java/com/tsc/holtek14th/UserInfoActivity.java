@@ -21,7 +21,38 @@ import com.tsc.holtek14th.FIrebaseAddData.AddTestData;
 
 public class UserInfoActivity extends AppCompatActivity {
     private TextView mTextMessage;
+    private String TAG = UserInfoActivity.class.getSimpleName();
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_info);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        mTextMessage = findViewById(R.id.message);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navView.setSelectedItemId(R.id.navigation_me);
+
+        ImageView userPhoto = findViewById(R.id.imgUserPhoto);
+        TextView txName = findViewById(R.id.txName);
+        TextView txEmail = findViewById(R.id.txEmail);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+        Uri photoUri = Uri.parse(sharedPreferences.getString("PHOTO", null));
+        Log.d(TAG, "onCreate: " + photoUri.toString());
+        if (photoUri != null) {
+            Picasso.get().load(photoUri).resize(300,300).into(userPhoto);
+        }
+        txName.setText(sharedPreferences.getString("NAME","null"));
+        txEmail.setText(sharedPreferences.getString("EMAIL","null"));
+    }
+
+    public void logout(View view){
+        Log.d(TAG, "auth is logout");
+        FirebaseAuth.getInstance().signOut();
+        finish();
+    }
+
+    //---navigation listener
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -48,37 +79,4 @@ public class UserInfoActivity extends AppCompatActivity {
             return false;
         }
     };
-
-    private String TAG = UserInfoActivity.class.getSimpleName();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navView.setSelectedItemId(R.id.navigation_me);
-
-        ImageView userPhoto = findViewById(R.id.imgUserPhoto);
-        TextView txName = findViewById(R.id.txName);
-        TextView txEmail = findViewById(R.id.txEmail);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
-        Uri photoUri = Uri.parse(sharedPreferences.getString("PHOTO", null));
-        Log.d(TAG, "onCreate: " + photoUri.toString());
-        if (photoUri != null) {
-            Picasso.get().load(photoUri).resize(300,300).into(userPhoto);
-        }
-        txName.setText(sharedPreferences.getString("NAME","null"));
-        txEmail.setText(sharedPreferences.getString("EMAIL","null"));
-
-
-    }
-
-    public void logout(View view){
-        Log.d(TAG, "auth is logout");
-        FirebaseAuth.getInstance().signOut();
-        finish();
-    }
 }
