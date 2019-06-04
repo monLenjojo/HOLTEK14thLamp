@@ -24,7 +24,6 @@ public class UserInfoActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -36,10 +35,11 @@ public class UserInfoActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                     return true;
                 case R.id.navigation_discover:
-//                    mTextMessage.setText(R.string.title_discover);
+                    Intent discoverPage = new Intent(UserInfoActivity.this,DiscoverActivity.class);
+                    startActivity(discoverPage);
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_in_left);
                     return true;
                 case R.id.navigation_me:
-//                    mTextMessage.setText(R.string.title_me);
                     return true;
                 case R.id.navigation_more:
 //                    mTextMessage.setText(R.string.title_more);
@@ -48,6 +48,7 @@ public class UserInfoActivity extends AppCompatActivity {
             return false;
         }
     };
+
     private String TAG = UserInfoActivity.class.getSimpleName();
 
     @Override

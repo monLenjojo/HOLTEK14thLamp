@@ -7,17 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.auth.User;
-import com.tsc.holtek14th.FIrebaseAddData.AddTestData;
-import com.tsc.holtek14th.recyclerFunction.MyLibraryRecyclerFunction;
+import com.tsc.holtek14th.myLibraryFunction.MyLibraryRecyclerFunction;
 
 public class MainActivity extends AppCompatActivity {
     public final static int LOGIN_REQUEST = 101;
@@ -69,10 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_myLibrary:
 //                    mTextMessage.setText(R.string.title_my_library);
 //                    Log.d("TAG", "onNavigationItemSelected: "+ new AddTestData());
-
                     return true;
                 case R.id.navigation_discover:
 //                    mTextMessage.setText(R.string.title_discover);
+                    Intent discoverPage = new Intent(MainActivity.this,DiscoverActivity.class);
+                    startActivity(discoverPage);
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_in_left);
                     return true;
                 case R.id.navigation_me:
                     Intent userInfoPage = new Intent(MainActivity.this, UserInfoActivity.class);

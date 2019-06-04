@@ -1,4 +1,4 @@
-package com.tsc.holtek14th.recyclerFunction;
+package com.tsc.holtek14th.myLibraryFunction;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.tsc.holtek14th.R;
 import com.tsc.holtek14th.javaBean.AllStoryFormat;
-import com.tsc.holtek14th.recyclerAdapter.MyLibraryRecyclerAdapter;
+import com.tsc.holtek14th.myLibraryFunction.MyLibraryRecyclerAdapter;
 
 import java.util.ArrayList;
 

@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (firebaseAuth.getCurrentUser() != null) {
                     setResult(RESULT_OK);
                     finish();
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                 }
             }
         });
@@ -99,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             Intent registerPage = new Intent(LoginActivity.this, RegisterActivity.class);
                                             startActivity(registerPage);
+                                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                                         }
                                     })
                                     .setPositiveButton("好", null)
@@ -113,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
     public void register(View view){
         Intent registerPage = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(registerPage);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
     }
 
     public void setUserDataSharedPreferences(FirebaseUser userAuth){
