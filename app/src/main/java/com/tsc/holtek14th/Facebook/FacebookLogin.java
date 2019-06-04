@@ -2,6 +2,7 @@ package com.tsc.holtek14th.Facebook;
 //implementation 'com.facebook.android:facebook-android-sdk:[4,5)' 要先引入SDK與其他設定
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -22,6 +23,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.tsc.holtek14th.MainActivity;
+import com.tsc.holtek14th.javaBean.UserDataFormat;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class FacebookLogin {
 
@@ -35,7 +42,7 @@ public class FacebookLogin {
         this.context = context;
         this.auth = auth;
         this.loginButton = loginButton;
-//        FacebookSdk.sdkInitialize(FacebookSdk.getApplicationContext());
+//        FacebookSdk.sdkInitialize(context);
 //        AppEventsLogger.activateApp(context);
     }
 
@@ -53,12 +60,13 @@ public class FacebookLogin {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = auth.getCurrentUser();
-                            Log.d(TAG, "onComplete: " + user.getUid() + "\\" + user.getDisplayName() + "\\" + user.getEmail());
-
+                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
+                                addUserData(user);
+                            }
+                            Log.d(TAG, user.getUid() + "\\" + user.getDisplayName() + "\\" + user.getEmail());
                         }else{
-                            Log.d(TAG, "onComplete: " + "login is Fail");
+                            Log.d(TAG,  "login is Fail");
                         }
-
                     }
                 });
             }
@@ -85,6 +93,28 @@ public class FacebookLogin {
         };
     }
 
+    public void addUserData(FirebaseUser user) {
+        DocumentReference base = FirebaseFirestore.getInstance().collection("userData").document(user.getUid());
+        base.set(new UserDataFormat(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString()))
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            setUserDataSharedPreferences(FirebaseAuth.getInstance().getCurrentUser());
+
+                        }
+                    }
+                });
+    }
+
+    public void setUserDataSharedPreferences(FirebaseUser userAuth){
+        context.getSharedPreferences("userData", MODE_PRIVATE).edit()
+                .putString("NAME", userAuth.getDisplayName())
+                .putString("EMAIL", userAuth.getEmail())
+                .putString("PHOTO", userAuth.getPhotoUrl().toString())
+//                .putString("PHOTO", Profile.getCurrentProfile().getProfilePictureUri(300,300).toString())
+                .commit();
+    }
 
     /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -22,7 +22,7 @@ import com.tsc.holtek14th.recyclerFunction.MyLibraryRecyclerFunction;
 public class MainActivity extends AppCompatActivity {
     public final static int LOGIN_REQUEST = 101;
     private static final String TAG = MainActivity.class.getSimpleName();
-    private FirebaseAuth auth;
+    private static FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_myLibrary:
 //                    mTextMessage.setText(R.string.title_my_library);
 //                    Log.d("TAG", "onNavigationItemSelected: "+ new AddTestData());
+
                     return true;
                 case R.id.navigation_discover:
 //                    mTextMessage.setText(R.string.title_discover);

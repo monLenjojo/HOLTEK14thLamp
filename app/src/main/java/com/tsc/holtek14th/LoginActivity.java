@@ -87,9 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isComplete()) {
                         if (task.isSuccessful()) {
-//                            setResult(RESULT_OK);
-//                            finish();
-                            Log.d(TAG, "signInWithEmailAndPassword: "+ task.getResult().getUser().getEmail() + "--Successful");
+                            FirebaseUser userAuth = task.getResult().getUser();
+                            setUserDataSharedPreferences(userAuth);
+//                            Log.d(TAG, "signInWithEmailAndPassword: "+ task.getResult().getUser().getEmail() + "--Successful");
                         } else {
                             new AlertDialog.Builder(LoginActivity.this)
                                     .setTitle("登入狀態")
@@ -97,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                                     .setNeutralButton("加入會員", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent registerPage = new Intent(LoginActivity.this, RegisterActivity.class);
+                                            startActivity(registerPage);
                                         }
                                     })
                                     .setPositiveButton("好", null)
@@ -108,7 +110,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void quit(View view){
-        finish();
+    public void register(View view){
+        Intent registerPage = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(registerPage);
+    }
+
+    public void setUserDataSharedPreferences(FirebaseUser userAuth){
+        getSharedPreferences("userData", MODE_PRIVATE).edit()
+                .putString("NAME", userAuth.getDisplayName())
+                .putString("EMAIL", userAuth.getEmail())
+//                .putString("PHOTO", userAuth.getPhotoUrl().toString())
+                .commit();
     }
 }

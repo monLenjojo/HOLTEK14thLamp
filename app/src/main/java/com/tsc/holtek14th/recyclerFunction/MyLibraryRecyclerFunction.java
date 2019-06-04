@@ -31,7 +31,7 @@ public class MyLibraryRecyclerFunction {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         if (userId != null) {
             firestore.collection("userData")
-                .document(userId)
+                .document(userId).collection("myLib").document()
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
