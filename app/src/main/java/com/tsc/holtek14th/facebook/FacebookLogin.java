@@ -1,8 +1,7 @@
-package com.tsc.holtek14th.Facebook;
+package com.tsc.holtek14th.facebook;
 //implementation 'com.facebook.android:facebook-android-sdk:[4,5)' 要先引入SDK與其他設定
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -11,9 +10,7 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.Profile;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.tsc.holtek14th.MainActivity;
 import com.tsc.holtek14th.javaBean.UserDataFormat;
 
 import static android.content.Context.MODE_PRIVATE;

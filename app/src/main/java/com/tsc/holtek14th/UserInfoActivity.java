@@ -13,11 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.FacebookActivity;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
-import com.tsc.holtek14th.FIrebaseAddData.AddTestData;
 
 public class UserInfoActivity extends AppCompatActivity {
     private TextView mTextMessage;
