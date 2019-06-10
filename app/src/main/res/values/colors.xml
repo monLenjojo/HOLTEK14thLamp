@@ -6,4 +6,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGold">#FF9800</color>
     <color name="colorGolden">#FFC107</color>
+    <color name="space1">#ABF</color>
+    <color name="space2">#AAF</color>
 </resources>

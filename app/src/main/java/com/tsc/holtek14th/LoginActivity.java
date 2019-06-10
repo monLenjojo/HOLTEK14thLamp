@@ -2,13 +2,27 @@ package com.tsc.holtek14th;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,7 +30,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.tsc.holtek14th.dialog.LoadingDialog;
 import com.tsc.holtek14th.facebook.FacebookLogin;
+
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edPasswd;
     private Boolean state;
     private FacebookLogin facebookLogin;
+    private TextInputLayout edPasswdLayout;
+    private TextInputLayout edUserIdLayout;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +54,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
 
+        edUserIdLayout = findViewById(R.id.edUserIdLayout);
+        edPasswdLayout = findViewById(R.id.edPasswdLayout);
+
         edUserId = findViewById(R.id.edUserId);
         edPasswd = findViewById(R.id.edPasswd);
 
         LoginButton loginButton = findViewById(R.id.login_button);
         facebookLogin = new FacebookLogin(this,auth,loginButton);
         facebookLogin.start();
+        constraintLayout = findViewById(R.id.loginConstraint);
 
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
@@ -51,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        new LoadingDialog(this,R.style.LoadingDialog,"loading...",true).show();
     }
 
     @Override
@@ -61,13 +87,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view){
         state = true;
-        edPasswd.setError(null);
+        View focusView = null;
         String userId = edUserId.getText().toString();
         String passwd = edPasswd.getText().toString();
-
-        if (passwd.length() <6) {
-            edPasswd.setError("密碼需大於6位");
+        if (!Pattern.compile("^(?=.*\\d)(?=.*[a-zA-Z]).{6,12}$").matcher(passwd).matches()) {
+            edPasswd.setError("Password need use english and digital in 6 to 12");
+            focusView = edPasswd;
             state = false;
+        }
+
+        if (!Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.+[a-zA-Z]{2,4}$").matcher(userId).matches()) {
+            edUserId.setError("Invalid email");
+            focusView = edUserId;
+            state=false;
         }
 
         if (state) {
@@ -95,8 +127,11 @@ public class LoginActivity extends AppCompatActivity {
                                     .show();
                         }
                     }
+//                    loading.setVisibility(View.GONE);
                 }
             });
+        }else{
+            focusView.requestFocus();
         }
     }
 
@@ -113,4 +148,5 @@ public class LoginActivity extends AppCompatActivity {
 //                .putString("PHOTO", userAuth.getPhotoUrl().toString())
                 .commit();
     }
+
 }

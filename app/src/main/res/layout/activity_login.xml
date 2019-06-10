@@ -2,71 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginConstraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_bg_space"
     tools:context=".LoginActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="帳 號"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorGold"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
-    <EditText
-        android:id="@+id/edUserId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Please input here"
-        android:inputType="textPersonName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorGold"
-        android:textColorHighlight="#80D8FF"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="密 碼"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorGold"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/edPasswd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Please input here"
-        android:inputType="textPassword"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorGold"
-        android:textColorHighlight="#80D8FF"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/edUserId"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline6"
@@ -124,7 +64,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/edPasswd" />
+        app:layout_constraintTop_toBottomOf="@+id/edPasswdLayout" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -136,5 +76,45 @@
         app:layout_constraintEnd_toEndOf="@+id/btLogin"
         app:layout_constraintStart_toStartOf="@+id/btFinish"
         app:layout_constraintTop_toBottomOf="@+id/btFinish" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/edUserIdLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColorHint="@color/space1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="@+id/guideline6">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edUserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Account Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorGolden" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/edPasswdLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColorHint="@color/space1"
+        app:layout_constraintEnd_toEndOf="@+id/edUserIdLayout"
+        app:layout_constraintStart_toStartOf="@+id/edUserIdLayout"
+        app:layout_constraintTop_toBottomOf="@+id/edUserIdLayout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edPasswd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Account Password"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorGolden" />
+    </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>
