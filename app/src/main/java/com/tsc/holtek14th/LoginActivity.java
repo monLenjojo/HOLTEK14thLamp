@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout edPasswdLayout;
     private TextInputLayout edUserIdLayout;
     private ConstraintLayout constraintLayout;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,23 +61,27 @@ public class LoginActivity extends AppCompatActivity {
         edUserId = findViewById(R.id.edUserId);
         edPasswd = findViewById(R.id.edPasswd);
 
-        LoginButton loginButton = findViewById(R.id.login_button);
+        final LoginButton loginButton = findViewById(R.id.login_button);
         facebookLogin = new FacebookLogin(this,auth,loginButton);
         facebookLogin.start();
-        constraintLayout = findViewById(R.id.loginConstraint);
 
+        constraintLayout = findViewById(R.id.loginConstraint);
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
                     setResult(RESULT_OK);
+                    if (loadingDialog.isShowing()) {
+                        loadingDialog.dismiss();
+                    }
+                    Intent mainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(mainActivity);
                     finish();
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                 }
             }
         });
-
-        new LoadingDialog(this,R.style.LoadingDialog,"loading...",true).show();
+        loadingDialog = new LoadingDialog(this,R.style.LoadingDialog,"loading...",false);
     }
 
     @Override
@@ -86,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view){
+        loadingDialog.show();
         state = true;
         View focusView = null;
         String userId = edUserId.getText().toString();
@@ -107,10 +113,10 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isComplete()) {
+                        loadingDialog.dismiss();
                         if (task.isSuccessful()) {
                             FirebaseUser userAuth = task.getResult().getUser();
                             setUserDataSharedPreferences(userAuth);
-//                            Log.d(TAG, "signInWithEmailAndPassword: "+ task.getResult().getUser().getEmail() + "--Successful");
                         } else {
                             new AlertDialog.Builder(LoginActivity.this)
                                     .setTitle("登入狀態")
@@ -127,10 +133,11 @@ public class LoginActivity extends AppCompatActivity {
                                     .show();
                         }
                     }
-//                    loading.setVisibility(View.GONE);
+                    loadingDialog.dismiss();
                 }
             });
         }else{
+            loadingDialog.dismiss();
             focusView.requestFocus();
         }
     }
@@ -148,5 +155,4 @@ public class LoginActivity extends AppCompatActivity {
 //                .putString("PHOTO", userAuth.getPhotoUrl().toString())
                 .commit();
     }
-
 }

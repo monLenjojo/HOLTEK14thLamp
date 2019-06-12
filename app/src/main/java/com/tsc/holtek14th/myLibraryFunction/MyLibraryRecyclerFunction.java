@@ -10,6 +10,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.tsc.holtek14th.R;
+import com.tsc.holtek14th.dialog.LoadingDialog;
 import com.tsc.holtek14th.javaBean.AllStoryFormat;
 import com.tsc.holtek14th.myLibraryFunction.MyLibraryRecyclerAdapter;
 
@@ -23,11 +24,14 @@ public class MyLibraryRecyclerFunction {
     RecyclerView recyclerView;
     String userId;
     ArrayList<AllStoryFormat> arrayList = new ArrayList();
+    LoadingDialog loadingDialog;
 
     public MyLibraryRecyclerFunction(Context context, final RecyclerView recyclerView, @Nullable String userId) {
         this.context = context;
         this.recyclerView = recyclerView;
         this.userId = userId;
+        loadingDialog = new LoadingDialog(context,R.style.LoadingDialog,"Loading...",false);
+        loadingDialog.show();
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         if (userId != null) {
             firestore.collection("userData")
@@ -41,7 +45,11 @@ public class MyLibraryRecyclerFunction {
                             arrayList.add(data);
                             upData();
                         }else {
-                            recyclerView.setBackgroundResource(R.drawable.login_bg_space);
+                            recyclerView.setBackgroundResource(R.drawable.nopic);
+                            recyclerView.setScaleY(0.5f);
+                        }
+                        if (loadingDialog.isShowing()) {
+                            loadingDialog.dismiss();
                         }
                     }
                 });

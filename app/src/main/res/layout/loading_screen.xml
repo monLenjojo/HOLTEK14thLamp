@@ -7,18 +7,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_loading_dialog">
 
-    <ImageView
-        android:id="@+id/star"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:srcCompat="@android:drawable/ic_notification_overlay" />
+        android:layout_centerInParent="true"/>
 
     <TextView
         android:id="@+id/loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/star"
+        android:layout_below="@id/progressBar"
         android:layout_centerHorizontal="true"
         android:text="Loading..."
         android:textAppearance="@style/TextAppearance.AppCompat.Large"

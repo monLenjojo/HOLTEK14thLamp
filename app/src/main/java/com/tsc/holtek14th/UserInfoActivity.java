@@ -34,9 +34,10 @@ public class UserInfoActivity extends AppCompatActivity {
         TextView txEmail = findViewById(R.id.txEmail);
 
         SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
-        Uri photoUri = Uri.parse(sharedPreferences.getString("PHOTO", null));
-        Log.d(TAG, "onCreate: " + photoUri.toString());
-        if (photoUri != null) {
+        String photoStr = sharedPreferences.getString("PHOTO", null);
+        Log.d(TAG, "onCreatePhotoUri: " + photoStr);
+        if (photoStr != null) {
+            Uri photoUri = Uri.parse(photoStr);
             Picasso.get().load(photoUri).resize(300,300).into(userPhoto);
         }
         txName.setText(sharedPreferences.getString("NAME","null"));
