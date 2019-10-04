@@ -8,7 +8,7 @@ public class UserDataFormat {
     String name;
     String email;
     String photo;
-    String myLib;
+//    String myLib;
 
     public UserDataFormat() {
     }
@@ -22,13 +22,6 @@ public class UserDataFormat {
         this.name = name;
         this.email = email;
         this.photo = photo;
-    }
-
-    public UserDataFormat(String name, String email, String photo, String myLib) {
-        this.name = name;
-        this.email = email;
-        this.photo = photo;
-        this.myLib = myLib;
     }
 
     public String getName() {
@@ -47,20 +40,12 @@ public class UserDataFormat {
         this.email = email;
     }
 
+    @Nullable
     public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(@Nullable String photo) {
         this.photo = photo;
-    }
-
-    @Nullable
-    public String getMyLib() {
-        return myLib;
-    }
-
-    public void setMyLib(@Nullable String myLib) {
-        this.myLib = myLib;
     }
 }

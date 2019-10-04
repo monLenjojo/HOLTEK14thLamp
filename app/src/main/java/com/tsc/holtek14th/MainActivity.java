@@ -11,20 +11,21 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.tsc.holtek14th.dialog.LoadingDialog;
+import com.tsc.holtek14th.firebaseAddData.AddTestData;
 import com.tsc.holtek14th.myLibraryFunction.MyLibraryRecyclerFunction;
 
 public class MainActivity extends AppCompatActivity {
     public final static int LOGIN_REQUEST = 101;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static FirebaseAuth auth;
+    private BottomNavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navView.setSelectedItemId(R.id.navigation_myLibrary);
         auth = FirebaseAuth.getInstance();
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
@@ -38,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        navView.setSelectedItemId(R.id.navigation_myLibrary);
+//        new AddTestData();
+    }
 
     //-----------------use intent and get result
     @Override
@@ -67,15 +73,18 @@ public class MainActivity extends AppCompatActivity {
                     Intent discoverPage = new Intent(MainActivity.this,DiscoverActivity.class);
                     startActivity(discoverPage);
                     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_in_left);
+                    MainActivity.this.finish();
                     return true;
                 case R.id.navigation_me:
                     Intent userInfoPage = new Intent(MainActivity.this, UserInfoActivity.class);
                     startActivity(userInfoPage);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
-//                    mTextMessage.setText(R.string.title_me);
+                    MainActivity.this.finish();
                     return true;
                 case R.id.navigation_more:
-//                    mTextMessage.setText(R.string.title_more);
+                    Intent morePage = new Intent(MainActivity.this, MoreActivity.class);
+                    startActivity(morePage);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                     return true;
             }
             return false;

@@ -1,6 +1,7 @@
 package com.tsc.holtek14th.myLibraryFunction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.tsc.holtek14th.MainActivity;
+import com.tsc.holtek14th.PlayerControlActivity;
 import com.tsc.holtek14th.R;
 import com.tsc.holtek14th.imgBase64.Base64toImg;
 import com.tsc.holtek14th.javaBean.AllStoryFormat;
@@ -42,6 +45,12 @@ public class MyLibraryRecyclerAdapter extends RecyclerView.Adapter<MyLibraryRecy
         myLibraryViewHolder.progressBar.setMax(100);
         myLibraryViewHolder.progressBar.setProgress(60);
         new Base64toImg(myLibraryViewHolder.photo,arrayList.get(i).getStoryPhoto());
+        myLibraryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, PlayerControlActivity.class));
+            }
+        });
     }
 
     @Override

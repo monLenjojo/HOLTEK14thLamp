@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#DB93AD</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorGray">#EEEEEE</color>
     <color name="colorGold">#FF9800</color>
     <color name="colorGolden">#FFC107</color>
     <color name="space1">#ABF</color>

@@ -14,17 +14,24 @@ import com.tsc.holtek14th.discoverFunction.DiscoverRecyclerFunction;
 
 public class DiscoverActivity extends AppCompatActivity {
 
+    private BottomNavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover);
-        BottomNavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigationView.setSelectedItemId(R.id.navigation_discover);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         RecyclerView recyclerView = findViewById(R.id.discoverRecycler);
         new DiscoverRecyclerFunction(this,recyclerView,user.getUid());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        navigationView.setSelectedItemId(R.id.navigation_discover);
     }
 
     //---navigation listener
@@ -37,6 +44,7 @@ public class DiscoverActivity extends AppCompatActivity {
                     Intent mainPage = new Intent(DiscoverActivity.this, MainActivity.class);
                     startActivity(mainPage);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+                    DiscoverActivity.this.finish();
                     return true;
                 case R.id.navigation_discover:
                     return true;
@@ -44,8 +52,12 @@ public class DiscoverActivity extends AppCompatActivity {
                     Intent userInfoPage = new Intent(DiscoverActivity.this, UserInfoActivity.class);
                     startActivity(userInfoPage);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+                    DiscoverActivity.this.finish();
                     return true;
                 case R.id.navigation_more:
+                    Intent morePage = new Intent(DiscoverActivity.this, MoreActivity.class);
+                    startActivity(morePage);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                     return true;
             }
             return false;

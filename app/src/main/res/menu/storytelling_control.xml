@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bt_speed"
+        android:icon="@drawable/ic_av_timer_black_24dp"
+        android:title="Speed" />
+    <item
+        android:id="@+id/bt_chapters"
+        android:icon="@drawable/ic_toc_black_24dp"
+        android:title="Chapters" />
+    <item
+        android:id="@+id/bt_sleepTimer"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="SleepTimer" />
+    <item
+        android:id="@+id/bt_bookmark"
+        android:icon="@android:drawable/ic_input_get"
+        android:title="Bookmark" />
+</menu>

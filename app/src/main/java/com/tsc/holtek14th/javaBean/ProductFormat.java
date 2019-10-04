@@ -1,16 +1,23 @@
 package com.tsc.holtek14th.javaBean;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.FieldValue;
+import java.util.HashMap;
+
 public class ProductFormat {
     String storyPath;
     String productKey;
     Boolean onUse;
-    String userTime;
+    Object useTime;
 
-    public ProductFormat(String storyPath, String productKey, Boolean onUse, String userTime) {
+    public ProductFormat() {
+    }
+
+    public ProductFormat(String storyPath, String productKey, Boolean onUse, Object useTime) {
         this.storyPath = storyPath;
         this.productKey = productKey;
         this.onUse = onUse;
-        this.userTime = userTime;
+        this.useTime = useTime;
     }
 
     public String getStoryPath() {
@@ -37,11 +44,15 @@ public class ProductFormat {
         this.onUse = onUse;
     }
 
-    public String getUserTime() {
-        return userTime;
+//    public String getUseTime() {
+//        return useTime;
+//    }
+
+    public Object getUseTime() {
+        return useTime;
     }
 
-    public void setUserTime(String userTime) {
-        this.userTime = userTime;
+    public void setUseTime(Object useTime) {
+        this.useTime = useTime;
     }
 }
